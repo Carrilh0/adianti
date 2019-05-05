@@ -117,6 +117,10 @@
         <icon>fa:circle-o fa:fw</icon>
         <action>cursoform</action>
       </menuitem>
+      <menuitem label="Aluno">
+        <icon>fa:circle-o fa:fw</icon>
+        <action>alunoform</action>
+      </menuitem>
     </menu>
   </menuitem>
   <menuitem label="Logout">
