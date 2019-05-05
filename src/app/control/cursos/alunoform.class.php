@@ -6,12 +6,15 @@ class alunoform extends TPage{
 
     public function __construct(){
         parent::__construct();
-
+        
         $this->form = new BootstrapFormBuilder('form_alunos');
 
+        $id = new TEntry('id');
         $nome = new TEntry('nome');
         $cursos = new TDBCombo('cursos_id','sample','Cursos','id','nome');
-
+        $id->setEditable(FALSE);
+        
+        $this->form->addFields([new TLabel('ID: ')], [$id]);       
         $this->form->addFields([new TLabel('Nome: ')], [$nome]);
         $this->form->addFields([new TLabel('Cursos: ')], [$cursos]);
 
@@ -21,21 +24,45 @@ class alunoform extends TPage{
 
     }
 
-    function onSave(){
+    public function onEdit($param){
+        try{
+            if(isset($param['key'])){
+                        
+
+                $key = $param['key'];
+                TTransaction::open('sample');
+                
+                $data = new Alunos($key);
+                $this->form->setData($data);
+    
+                TTransaction::close();
+            
+            }else{
+                $this->form->clear();
+            }
+    
+        }catch(Exception $e){
+                new TMessage('error',$e->getMessage());
+            }
+    
+    }
+    
+    function onSave($param){
         
         try{
+        
         TTransaction::open('sample');
         
         $data = $this->form->getData('Alunos');
-        $alunos->store();
+        $data->store();
         TTransaction::close();
 
-        new TMessage('info', "{$alunos->nome} Cadastrado com sucesso");
-        
+        new TMessage('info', "Operação realizada com sucesso");
+
         }catch(Exception $e){
             new TMessage('error',$e->getMessage());
         }
-
+        
     }
 
 } 
