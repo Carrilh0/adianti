@@ -12,6 +12,6 @@ class Cursos extends TRecord{
         parent::addAttribute('nome');
 
     }
-
+ 
 
 }
