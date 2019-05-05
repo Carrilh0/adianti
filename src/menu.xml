@@ -117,10 +117,6 @@
         <icon>fa:circle-o fa:fw</icon>
         <action>cursoform</action>
       </menuitem>
-      <menuitem label="Aluno">
-        <icon>fa:circle-o fa:fw</icon>
-        <action>alunoform</action>
-      </menuitem>
       <menuitem label="Listar Alunos">
         <icon>fa:circle-o fa:fw</icon>
         <action>alunolist</action>
