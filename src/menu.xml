@@ -121,6 +121,10 @@
         <icon>fa:circle-o fa:fw</icon>
         <action>alunoform</action>
       </menuitem>
+      <menuitem label="Listar Alunos">
+        <icon>fa:circle-o fa:fw</icon>
+        <action>alunolist</action>
+      </menuitem>
     </menu>
   </menuitem>
   <menuitem label="Logout">
