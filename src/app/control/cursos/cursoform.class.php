@@ -7,7 +7,7 @@ class cursoform extends TPage
 
     function __construct(){
         parent::__construct();
-        $this->form = new BootstrapFormBuilder;
+        $this->form = new BootstrapFormBuilder('form_cursos');
 
 
         $nome = new TEntry('nome');

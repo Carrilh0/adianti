@@ -3,7 +3,7 @@
 
 class Alunos extends TRecord{
 
-    const TABLENAME = 'pessoas';
+    const TABLENAME = 'alunos';
     const PRIMARYKEY = 'id';
     const IDPOLICY = 'serial';
 
