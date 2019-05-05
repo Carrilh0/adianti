@@ -8,7 +8,7 @@ class Alunos extends TRecord{
     const IDPOLICY = 'serial';
 
     private $cursos;
-
+ 
     public function __constructor($id = NULL ){
         parent::__constructor($id);
 
