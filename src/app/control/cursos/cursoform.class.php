@@ -17,7 +17,7 @@ class cursoform extends TPage
         
         $this->form->addAction('Enviar',new TAction(array($this,'onSave')),'fa:check-circle-o green');
         
-
+ 
         parent::add($this->form);
 
     }
