@@ -113,13 +113,13 @@
         <icon>fa:child fa:fw</icon>
         <action>pessoa</action>
       </menuitem>
-      <menuitem label="Curso">
-        <icon>fa:circle-o fa:fw</icon>
-        <action>cursoform</action>
-      </menuitem>
       <menuitem label="Listar Alunos">
         <icon>fa:circle-o fa:fw</icon>
         <action>alunolist</action>
+      </menuitem>
+      <menuitem label="Listar Cursos">
+        <icon>fa:circle-o fa:fw</icon>
+        <action>cursolist</action>
       </menuitem>
     </menu>
   </menuitem>
