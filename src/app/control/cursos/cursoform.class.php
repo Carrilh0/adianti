@@ -9,12 +9,13 @@ class cursoform extends TPage
         parent::__construct();
         $this->form = new BootstrapFormBuilder('form_cursos');
 
-
+        $id = new TEntry('id');
         $nome = new TEntry('nome');
 
         
+        $this->form->addFields([new TLabel('ID: ')],      [$id]);       
         $this->form->addFields([new TLabel('Nome')],      [$nome]);       
-        
+        $id->setEditable(false);
         $this->form->addAction('Enviar',new TAction(array($this,'onSave')),'fa:check-circle-o green');
         
  
@@ -22,18 +23,33 @@ class cursoform extends TPage
 
     }
 
-        function onSave(){
+    public function onEdit($param){
+        try{
+            if(isset($param['key'])){
+                $key = $param['key'];
+                TTransaction::open('sample');
+
+                $data = new Cursos($key);
+                $this->form->setData($data);
+
+                TTransaction::close();
+            }else{
+                $this->form->clear();
+            }
+        }catch(Exception $e){
+            new TMessage('error',$e-GetMessage());
+        }
+    }
+
+    function onSave(){
         
             try{
                 TTransaction::open('sample');
-                $data = $this->form->getData();
+                $data = $this->form->getData('Cursos');
                 
-                $cursos = new cursos();
-                $cursos->nome = $data->nome;
-
-                $cursos->store();
+                $data->store();
     
-                new TMessage('info',"Curso {$cursos->nome} Cadastrado com sucesso");
+                new TMessage('info',"Operação realizada com sucesso");
                 
                 TTransaction::close();
     
@@ -42,4 +58,5 @@ class cursoform extends TPage
             }
         }
 
+        
 }
