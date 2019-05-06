@@ -4,11 +4,13 @@ class cursolist extends TPage{
 
     private $datagrid; //variavel para armazenar o datagrid
     private $loaded;    //variavel para armazenar os dados do banco e jogar na lista
-    
+
     public function __construct(){
         parent::__construct();
-    
-    
+        
+        $form = new TQuickForm();
+        $form->addQuickAction('Novo', new TAction(array('cursoform','onEdit')));
+            
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid());    //Pegando a classe do bootsrap a salvando na variavel da grid
         $this->datagrid->width = '100%';
         
@@ -28,10 +30,14 @@ class cursolist extends TPage{
         $action_group->addAction($edit);
 
         $this->datagrid->addActionGroup($action_group);
-
         $this->datagrid->createModel();
 
-        parent::add($this->datagrid);
+        $box = new TVBox();
+        $box->add($form);
+        $box->add($this->datagrid);
+        $box->style = 'width: 100%;';
+
+        parent::add($box);
     }
     
     function onReload(){

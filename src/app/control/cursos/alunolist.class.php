@@ -4,25 +4,39 @@ class alunolist extends TPage{
 
     private $datagrid;
     private $loaded;
+
     public function __construct(){
         parent::__construct();
 
         $form = new TQuickForm();
         $form->addQuickAction('Novo', new TAction(array('alunoform','onEdit')));
-
-        $this->datagrid = new BootstrapDatagridWrapper(new TQuickGrid());
+        
+        $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid());
         $this->datagrid->width = '100%';
 
-        $this->datagrid->addQuickColumn('#','id');
-        $this->datagrid->addQuickColumn('Nome','nome');
-        $this->datagrid->enablePopover('Nome',"{nome}");
-        $this->datagrid->addQuickAction('Editar',new TDataGridAction(array('alunoform','onEdit')),'id');
+        $id = new TDataGridColumn('id','#','left');
+        $nome = new TDataGridColumn('nome','Nome','left');
+        
+        $this->datagrid->addColumn($id);
+        $this->datagrid->addColumn($nome);
+
+
+        $edit = new TDataGridAction(array('alunoform', 'onEdit'));
+        $edit->setLabel('Editar');
+        $edit->setImage('fa:search green');
+        $edit->setField('id');
+
+        $action_group = new TDataGridActionGroup('Opções','bs:th');
+        $action_group->addHeader('Opções Disponiveis');
+        $action_group->addAction($edit);
+
+        $this->datagrid->addActionGroup($action_group);
         $this->datagrid->createModel();
 
         $box = new TVBox();
         $box->add($form);
         $box->add($this->datagrid);
-
+        $box->style = 'width: 100%;';
 
         parent::add($box);
     }
