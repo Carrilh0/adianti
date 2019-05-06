@@ -23,12 +23,20 @@ class alunolist extends TPage{
 
         $edit = new TDataGridAction(array('alunoform', 'onEdit'));
         $edit->setLabel('Editar');
-        $edit->setImage('fa:search green');
+        $edit->setImage('fa:search blue');
         $edit->setField('id');
+
+        $delet = new TDataGridAction(array($this,'onDelet'));
+        $delet->setLabel('Remover');
+        $delet->setImage('fa:search red');
+        $delet->setField('id');
 
         $action_group = new TDataGridActionGroup('Opções','bs:th');
         $action_group->addHeader('Opções Disponiveis');
         $action_group->addAction($edit);
+        $action_group->addSeparator();
+        $action_group->addAction($delet);
+
 
         $this->datagrid->addActionGroup($action_group);
         $this->datagrid->createModel();
@@ -41,6 +49,21 @@ class alunolist extends TPage{
         parent::add($box);
     }
     
+    public function onDelet($param){
+
+        try{
+            TTransaction::open('sample');
+            
+            $aluno = new Cursos($param['key']);
+            $aluno->delete();
+            AdiantiCoreApplication::loadPage('alunolist');
+
+            TTransaction::close();
+        }catch(Exception $e){
+            new TMessage('error',$e->getMessage);
+        }
+    }
+
     public function onReload($param){
         try{
             TTransaction::open('sample');
