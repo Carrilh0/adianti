@@ -7,7 +7,7 @@ class alunolist extends TPage{
     public function __construct(){
         parent::__construct();
 
-        $form = new TQuickForm('teste');
+        $form = new TQuickForm();
         $form->addQuickAction('Novo', new TAction(array('alunoform','onEdit')));
 
         $this->datagrid = new BootstrapDatagridWrapper(new TQuickGrid());
